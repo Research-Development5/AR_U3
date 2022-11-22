@@ -1,2 +1,2 @@
-# AR_U3
-Audio Recording Application.
+# Audio_Data_Recording
+An streamlit_web app to record audio data.
