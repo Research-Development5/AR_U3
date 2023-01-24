@@ -37,7 +37,7 @@ sheet = client.open("recorded voices").get_worksheet(3)
 #sheet = client.open("recorded voices").sheet1
 existing=gd.get_as_dataframe(sheet)
 x=len(existing)
-print("the number is"+ x)
+print("the number is", x)
 def functionality():
     card(title=df[x], text=' ', image="https://images.pexels.com/photos/2341290/pexels-photo-2341290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
 
