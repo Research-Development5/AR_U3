@@ -8,4 +8,3 @@ sounddevice
 wavio
 google-api-python-client
 streamlit-audiorecorder
-click==7.5.0 
