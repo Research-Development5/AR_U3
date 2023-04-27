@@ -117,7 +117,7 @@ if choose=='Record voice':
             #save_record(path_myrecording, st.session_state["rec"], 48000)
             os.remove('./temp/sample.wav')
             print
-            final=final.append({'word':word,'voice':path_myrecording},ignore_index=True)
+            final=pd.concat([final, final([{'word':word,'voice':path_myrecording}])],ignore_index=True)
             final.to_csv('final.csv',index=False)
             st.write('File Saved')
             st.session_state["counter"] = 0
