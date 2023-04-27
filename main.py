@@ -31,17 +31,17 @@ def local_css(file_name):
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 local_css('style.css')
 st.image(image='HeaderBanner.jpg')
-credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
-client = gspread.authorize(credentials)
-sheet = client.open("recorded voices").get_worksheet(3)
+#credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
+#client = gspread.authorize(credentials)
+#sheet = client.open("recorded voices").get_worksheet(2)
 #sheet = client.open("recorded voices").sheet1
-existing=gd.get_as_dataframe(sheet)
-x=len(existing)
+#existing=gd.get_as_dataframe(sheet)
+#x=len(existing)
 
 def functionality():
     credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
     client = gspread.authorize(credentials)
-    sheet = client.open("recorded voices").get_worksheet(3)
+    sheet = client.open("recorded voices").get_worksheet(2)
     #sheet = client.open("recorded voices").sheet1
     existing=gd.get_as_dataframe(sheet)
     x=len(existing)
@@ -88,6 +88,12 @@ if choose=='Record voice':
         if st.session_state["counter"] ==0:
             st.warning('voice not recorded yet first record it please')
         else:
+            credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
+            client = gspread.authorize(credentials)
+            sheet = client.open("recorded voices").get_worksheet(2)
+         #sheet = client.open("recorded voices").sheet1
+            existing=gd.get_as_dataframe(sheet)
+            x=len(existing)
             df=pd.read_csv('voices_unavailable.csv')
             word=df['word'][x]
             df=df.drop(df.loc[df['word']==word].index.values)
@@ -101,11 +107,11 @@ if choose=='Record voice':
             except:
                 credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
                 client = gspread.authorize(credentials)
-                sheet = client.open("recorded voices").get_worksheet(3)
+                sheet = client.open("recorded voices").get_worksheet(2)
                 existing=gd.get_as_dataframe(sheet)
                 x=len(existing)
                 file_name=str(x+1)
-            path_myrecording = f"./recorded_voices/user_3_"+file_name+".wav"
+            path_myrecording = f"./recorded_voices/user_4_"+file_name+".wav"
             wav_file = open(path_myrecording, "wb")
             wav_file.write(audio1.tobytes())
             #save_record(path_myrecording, st.session_state["rec"], 48000)
@@ -123,7 +129,7 @@ if choose=='Data recorded / Upload':
     #credentials = ServiceAccountCredentials.from_json_keyfile_name("words-correction-a710f731b5e8.json", scope)
     credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
     client = gspread.authorize(credentials)
-    sheet = client.open("recorded voices").get_worksheet(3)
+    sheet = client.open("recorded voices").get_worksheet(2)
     final= pd.read_csv('final.csv')
     st.write(final)
     upload= st.button('Upload File')
