@@ -53,9 +53,9 @@ with st.sidebar:
                          icons=['mic','check' ],
                           default_index=0)
 if choose=='Record voice':
-   
+    functionality()
     df=df['word']
-    print(df)
+    #print(df)
     st.markdown('<p class="urdu-font"; style=text-align:center; >اردو ڈیٹا کی ریکارڈنگ برائے تکلم شناسی </p>', unsafe_allow_html=True)
     if "counter" not in st.session_state:
         st.session_state["counter"] = 0
