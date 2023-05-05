@@ -62,13 +62,7 @@ if choose=='Record voice':
         st.session_state["rec"]=None
     
     with st.form("My form",clear_on_submit=True):
-        credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
-        client = gspread.authorize(credentials)
-        sheet = client.open("recorded voices").get_worksheet(3)
-        #sheet = client.open("recorded voices").sheet1
-        existing=gd.get_as_dataframe(sheet)
-        x=len(existing)
-        card(title=df[x], text=' ', image="https://images.pexels.com/photos/2341290/pexels-photo-2341290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+        functionality()
         st.write("آواز ریکارڈ کر نے کے لئے 'ریکارڈ  کیجیے'   اور ریکارڈ شدہ آواز کو سننے کےلئے'آواز سنیے'کے بٹن کو دبائیں ۔")
         audio1 = audiorecorder("ریکارڈ کیجیے۔", "Recording... Click to Stop")
         #st.write(audio1)
@@ -142,8 +136,8 @@ if choose=='Data recorded / Upload':
     if upload:
         for i in final['voice']:
             upload_file(i)
-        existing=gd.get_as_dataframe(sheet)
-        updated= existing.append(final)
+        existing1=gd.get_as_dataframe(sheet)
+        updated= existing1.append(final)
         gd.set_with_dataframe(sheet,updated)
         final.drop(final.index, inplace=True)
         final.to_csv('final.csv',index=False)
