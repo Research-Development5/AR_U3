@@ -45,7 +45,7 @@ def functionality():
     #sheet = client.open("recorded voices").sheet1
     existing=gd.get_as_dataframe(sheet)
     x=len(existing)
-    card(title=df[x], text=' ', image="https://images.pexels.com/photos/2341290/pexels-photo-2341290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
+    #card(title=df[x], text=' ', image="https://images.pexels.com/photos/2341290/pexels-photo-2341290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
 
 
 with st.sidebar:
@@ -53,7 +53,7 @@ with st.sidebar:
                          icons=['mic','check' ],
                           default_index=0)
 if choose=='Record voice':
-    functionality()
+    #functionality()
     df=df['word']
     #print(df)
     st.markdown('<p class="urdu-font"; style=text-align:center; >اردو ڈیٹا کی ریکارڈنگ برائے تکلم شناسی </p>', unsafe_allow_html=True)
