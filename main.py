@@ -17,7 +17,7 @@ import numpy as np
 import streamlit as st
 from io import BytesIO
 import streamlit.components.v1 as components
-from audiorecorder import audiorecorder
+from audiorecorder import audiorecorder], ignore_index=True
 
 
 
@@ -139,7 +139,7 @@ if choose=='Data recorded / Upload':
             upload_file(i)
         existing1=gd.get_as_dataframe(sheet)
         updated=pd.concat([existing1, pd.DataFrame([final])], ignore_index=True)
-        updated= existing1.append(final)
+        #updated= existing1.append(final)
         gd.set_with_dataframe(sheet,updated)
         final.drop(final.index, inplace=True)
         final.to_csv('final.csv',index=False)
