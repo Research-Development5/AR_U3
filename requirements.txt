@@ -1,4 +1,4 @@
-streamlit==1.0
+streamlit
 streamlit_card
 gspread
 oauth2client
