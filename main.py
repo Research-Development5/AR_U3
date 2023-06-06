@@ -138,7 +138,7 @@ if choose=='Data recorded / Upload':
         for i in final['voice']:
             upload_file(i)
         existing1=gd.get_as_dataframe(sheet)
-        updated=pd.concat(existing1, pd.DataFrame([final]))
+        updated=pd.concat(existing1, final)
         #updated= existing1.append(final)
         gd.set_with_dataframe(sheet,updated)
         final.drop(final.index, inplace=True)
