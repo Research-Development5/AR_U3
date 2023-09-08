@@ -70,12 +70,12 @@ if choose=='Record voice':
         submitted = st.form_submit_button("آواز سنیے۔")
         if submitted:
          if len(audio1) > 0:
-            audio_bytes = audio1.tobytes()
+            #audio_bytes = audio1.tobytes()
             st.audio(audio1)
             st.write("آواز دوبارہ ریکارڈ کرنے کے لیے' ریکارڈ کیجیے' کا بٹن دبائیں۔")
             wav_file = open("./temp/sample.wav", "wb")
-            wav_file.write(audio_bytes)
-            #wav_file.write(audio1.tobytes())
+            #wav_file.write(audio_bytes)
+            wav_file.write(audio1.tobytes())
            # record_state= st.text('recording...')
           #  duration=3
            # fs=48000
