@@ -33,7 +33,7 @@ local_css('style.css')
 st.image(image='HeaderBanner.jpg')
 #credentials = ServiceAccountCredentials.from_json_keyfile_name("voices-367409-3c9e0403a16a.json", scope)
 #client = gspread.authorize(credentials)
-#sheet = client.open("recorded voices").get_worksheet(2)
+#sheet = client.open("recorded voices").get_worksheet(3)
 #sheet = client.open("recorded voices").sheet1
 #existing=gd.get_as_dataframe(sheet)
 #x=len(existing)
@@ -53,7 +53,7 @@ with st.sidebar:
                          icons=['mic','check' ],
                           default_index=0)
 if choose=='Record voice':
-    #functionality()
+   
     df=df['word']
     #print(df)
     st.markdown('<p class="urdu-font"; style=text-align:center; >اردو ڈیٹا کی ریکارڈنگ برائے تکلم شناسی </p>', unsafe_allow_html=True)
@@ -70,11 +70,9 @@ if choose=='Record voice':
         submitted = st.form_submit_button("آواز سنیے۔")
         if submitted:
          if len(audio1) > 0:
-            #audio_bytes = audio1.tobytes()
             st.audio(audio1)
             st.write("آواز دوبارہ ریکارڈ کرنے کے لیے' ریکارڈ کیجیے' کا بٹن دبائیں۔")
             wav_file = open("./temp/sample.wav", "wb")
-            #wav_file.write(audio_bytes)
             wav_file.write(audio1.tobytes())
            # record_state= st.text('recording...')
           #  duration=3
@@ -113,7 +111,7 @@ if choose=='Record voice':
                 existing=gd.get_as_dataframe(sheet)
                 x=len(existing)
                 file_name=str(x+1)
-            path_myrecording = f"./recorded_voices/user_3_"+file_name+".wav"
+            path_myrecording = f"./recorded_voices/user_4_"+file_name+".wav"
             wav_file = open(path_myrecording, "wb")
             wav_file.write(audio1.tobytes())
             #save_record(path_myrecording, st.session_state["rec"], 48000)
