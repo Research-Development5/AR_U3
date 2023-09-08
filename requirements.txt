@@ -9,3 +9,4 @@ wavio
 google-api-python-client
 streamlit-audiorecorder
 pandas
+click==7.*
