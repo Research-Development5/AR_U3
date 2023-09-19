@@ -19,7 +19,9 @@ from io import BytesIO
 import streamlit.components.v1 as components
 from audiorecorder import audiorecorder
 
-
+from pydub import AudioSegment
+import tempfile
+import io
 
 from upload_audios import upload_file
 scope = ['https://www.googleapis.com/auth/spreadsheets',
@@ -70,10 +72,32 @@ if choose=='Record voice':
         submitted = st.form_submit_button("آواز سنیے۔")
         if submitted:
          if len(audio1) > 0:
-            st.audio(audio1)
+            temp_audio_file = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
+            audio1.export(temp_audio_file.name, format="wav")
+# Display the audio in your Streamlit app
+            st.audio(temp_audio_file.name)
+
+# Close and delete the temporary audio file when done
+            temp_audio_file.close()
+            #st.audio(audio1)
             st.write("آواز دوبارہ ریکارڈ کرنے کے لیے' ریکارڈ کیجیے' کا بٹن دبائیں۔")
-            wav_file = open("./temp/sample.wav", "wb")
-            wav_file.write(audio1.tobytes())
+
+         # Export the AudioSegment object to an in-memory bytes-like object
+            audio_bytes = io.BytesIO()
+            audio1.export(audio_bytes, format="wav")
+
+# Display the audio in your Streamlit app
+            #st.audio(audio_bytes)
+
+# Optionally, you can save the bytes to a file if needed
+            with open("./temp/sample.wav", "wb") as wav_file:
+                wav_file.write(audio_bytes.getvalue())
+            
+                  
+            #st.audio(audio1)
+            #st.write("آواز دوبارہ ریکارڈ کرنے کے لیے' ریکارڈ کیجیے' کا بٹن دبائیں۔")
+            #wav_file = open("./temp/sample.wav", "wb")
+            #wav_file.write(audio1.tobytes())
            # record_state= st.text('recording...')
           #  duration=3
            # fs=48000
@@ -113,7 +137,10 @@ if choose=='Record voice':
                 file_name=str(x+1)
             path_myrecording = f"./recorded_voices/user_4_"+file_name+".wav"
             wav_file = open(path_myrecording, "wb")
-            wav_file.write(audio1.tobytes())
+            audio_bytes = io.BytesIO()
+            audio1.export(audio_bytes, format="wav")
+            wav_file.write(audio_bytes.getvalue())
+            #wav_file.write(audio1.tobytes())
             #save_record(path_myrecording, st.session_state["rec"], 48000)
             os.remove('./temp/sample.wav')
             print
